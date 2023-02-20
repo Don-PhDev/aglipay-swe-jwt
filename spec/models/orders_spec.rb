@@ -18,7 +18,7 @@ RSpec.describe Order, type: :model do
       expect(subject).to be_valid
     end
 
-    context 'when quantity is zero' do
+    context "when quantity is zero" do
       let(:quantity) { 0 }
       it "is not valid" do
         expect(subject).to_not be_valid

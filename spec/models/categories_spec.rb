@@ -6,7 +6,7 @@ RSpec.describe Category, type: :model do
   end
 
   # Validations
-  let(:name) { 'dairy' }
+  let(:name) { "dairy" }
   let(:subject) do
     build(:category, name: name)
   end
@@ -15,8 +15,8 @@ RSpec.describe Category, type: :model do
     expect(subject).to be_valid
   end
 
-  context 'when name is empty' do
-    let(:name) { '' }
+  context "when name is empty" do
+    let(:name) { "" }
     it "is not valid" do
       expect(subject).to_not be_valid
     end
