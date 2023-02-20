@@ -50,6 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_20_092048) do
     t.bigint "user_id", null: false
     t.bigint "product_id", null: false
     t.integer "quantity", null: false
+    t.decimal "total_amount", precision: 7, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_orders_on_product_id"
