@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_17_061131) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_20_055912) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_17_061131) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.integer "quantity", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_orders_on_product_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.check_constraint "quantity < 0", name: "price_check"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.bigint "categories_id", null: false
+    t.string "name", null: false
+    t.decimal "price", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["categories_id"], name: "index_products_on_categories_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -32,4 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_17_061131) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "orders", "products"
+  add_foreign_key "orders", "users"
+  add_foreign_key "products", "categories", column: "categories_id"
 end
