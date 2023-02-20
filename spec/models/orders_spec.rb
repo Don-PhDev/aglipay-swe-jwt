@@ -7,23 +7,29 @@ RSpec.describe Order, type: :model do
   end
 
   describe "validations" do
-    it { should validate_presence_of(:quantity) }
-  end
+    let(:quantity) { 2 }
+    let(:product) { create(:product, price: 2.00) }
+    let(:total) { 4.00 }
+    let(:subject) do
+      build(:order, product: product, quantity: quantity, total_amount: total)
+    end
 
-  # Validations
-  let(:quantity) { 10 }
-  let(:subject) do
-    build(:order, quantity: quantity)
-  end
+    it "is valid with valid attributes" do
+      expect(subject).to be_valid
+    end
 
-  it "is valid with valid attributes" do
-    expect(subject).to be_valid
-  end
+    context 'when quantity is zero' do
+      let(:quantity) { 0 }
+      it "is not valid" do
+        expect(subject).to_not be_valid
+      end
+    end
 
-  context 'when quantity is zero' do
-    let(:quantity) { 0 }
-    it "is not valid" do
-      expect(subject).to_not be_valid
+    context "when total_amount is other than the price times quantity" do
+      let(:total) { 3.00 }
+      it "is not valid" do
+        expect(subject).to_not be_valid
+      end
     end
   end
 end
