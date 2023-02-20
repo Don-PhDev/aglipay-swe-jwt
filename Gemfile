@@ -72,5 +72,6 @@ end
 
 group :test do
   gem "shoulda-matchers", "~> 5.3"
+  gem "database_cleaner-active_record"
 end
 

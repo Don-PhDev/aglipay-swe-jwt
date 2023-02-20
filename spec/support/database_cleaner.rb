@@ -1,4 +1,5 @@
-require 'database_cleaner'
+require 'database_cleaner/active_record'
+
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
