@@ -55,7 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_20_092048) do
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
-    t.check_constraint "quantity < 0", name: "price_check"
+    t.check_constraint "quantity > 0", name: "quantity_check"
   end
 
   create_table "products", force: :cascade do |t|
