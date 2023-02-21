@@ -116,6 +116,11 @@ GEM
     formtastic_i18n (0.7.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    gon (6.4.0)
+      actionpack (>= 3.0.20)
+      i18n (>= 0.7)
+      multi_json
+      request_store (>= 1.0)
     has_scope (0.8.1)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
@@ -165,6 +170,7 @@ GEM
     mini_portile2 (2.8.1)
     minitest (5.17.0)
     msgpack (1.6.0)
+    multi_json (1.15.0)
     net-imap (0.3.4)
       date
       net-protocol
@@ -228,6 +234,8 @@ GEM
     redis (4.8.1)
     reline (0.3.2)
       io-console (~> 0.5)
+    request_store (1.5.1)
+      rack (>= 1.4)
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
@@ -301,6 +309,7 @@ DEPENDENCIES
   devise
   factory_bot_rails
   faker
+  gon
   importmap-rails
   jbuilder
   pg (~> 1.1)
