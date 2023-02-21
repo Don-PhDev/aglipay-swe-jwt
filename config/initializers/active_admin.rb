@@ -214,7 +214,7 @@ ActiveAdmin.setup do |config|
   #   config.register_stylesheet 'my_print_stylesheet.css', media: :print
   #
   # To load a javascript file:
-  #   config.register_javascript 'my_javascript.js'
+  config.register_javascript 'orders.js'
 
   # == CSV options
   #
@@ -332,4 +332,24 @@ ActiveAdmin.setup do |config|
   # You can switch to using Webpacker here.
   #
   # config.use_webpacker = true
+end
+
+module ActiveAdmin
+  module Views
+    module Pages
+      class Base < Arbre::HTML::Document
+
+        alias original_build_head build_active_admin_head
+
+        def build_active_admin_head
+          original_build_head
+
+          within head do
+            text_node Gon::Base.render_data({})
+          end
+        end
+
+      end
+    end
+  end
 end
