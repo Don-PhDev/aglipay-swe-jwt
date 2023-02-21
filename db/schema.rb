@@ -50,7 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_20_092048) do
     t.bigint "user_id", null: false
     t.bigint "product_id", null: false
     t.integer "quantity", null: false
-    t.decimal "total_amount", precision: 7, scale: 2
+    t.decimal "total_amount", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_orders_on_product_id"
@@ -61,7 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_20_092048) do
   create_table "products", force: :cascade do |t|
     t.bigint "category_id", null: false
     t.string "name", null: false
-    t.decimal "price", precision: 5, scale: 2
+    t.decimal "price", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
