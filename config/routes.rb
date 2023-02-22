@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    sessions: 'users/sessions'
+    registrations: "users/registrations",
+    sessions: "users/sessions"
   }
+
+  get "/member-data", to: "members#show"
+
 
   namespace :api do
     namespace :v1 do
