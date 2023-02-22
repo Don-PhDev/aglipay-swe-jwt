@@ -34,6 +34,8 @@ gem "redis", "~> 4.0"
 # gem "kredis"
 
 gem "devise"
+gem "devise-jwt"
+gem "rack-cors"
 gem "activeadmin"
 gem "gon"
 
