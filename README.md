@@ -98,10 +98,10 @@ curl -H "Content-Type: application/json" -X DELETE -d '' -H 'Authorization: <AUT
 **Note**: Replace `<AUTH_TOKEN>` with the user's authentication token.
 
 ### Check If Logged In
-To check if a user is logged in, send a `GET` request to `/users/member_data` with the user's authentication token in the Authorization header:
+To check if a user is logged in, send a `GET` request to `/users/member-data` with the user's authentication token in the Authorization header:
 
 ```bash
-curl -H "Content-Type: application/json" -H 'Authorization: <AUTH_TOKEN>' http://localhost:3000/users/member_data
+curl -H "Content-Type: application/json" -H 'Authorization: <AUTH_TOKEN>' http://localhost:3000/users/member-data
 ```
 
 **Note**: Replace `<AUTH_TOKEN>` with the user's authentication token.

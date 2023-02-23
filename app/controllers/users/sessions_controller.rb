@@ -3,6 +3,16 @@
 class Users::SessionsController < Devise::SessionsController
   respond_to :json
 
+  def create
+    user = User.find_by(email: params[:user][:email])
+    if user && user.valid_password?(params[:user][:password])
+      sign_in user
+      respond_with user, status: :ok, location: after_sign_in_path_for(user)
+    else
+      render json: { error: 'Invalid email or password' }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def respond_with(resource, _opts = {})
