@@ -8,5 +8,7 @@ class User < ApplicationRecord
 
   has_many :orders
 
+  validates :email, presence: true, uniqueness: true
+
   alias_attribute :name, :email
 end

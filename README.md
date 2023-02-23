@@ -112,7 +112,6 @@ curl -H "Content-Type: application/json" -H 'Authorization: <AUTH_TOKEN>' http:/
 Send a `POST` request to `/api/v1/products` with the following parameters:
 
 - `name`
-- `description`
 - `price`
 - `category_id`
 
@@ -122,7 +121,6 @@ Include the JWT token in the headers of the request.
 Send a `PUT` request to `/api/v1/products/:id` with the following parameters:
 
 - `name`
-- `description`
 - `price`
 - `category_id`
 
