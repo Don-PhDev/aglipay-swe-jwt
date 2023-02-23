@@ -40,7 +40,15 @@ Start the server:
 ```bash
 rails server
 ```
-    
+
+## Running Tests
+
+To run tests, run the following command:
+
+```bash
+rspec
+```
+
 ## Usage/Examples
 
 ### Register a User
