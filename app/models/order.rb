@@ -4,9 +4,11 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :product
 
-  validate :total_amount do
-    if product.present? && total_amount != product.price * quantity
-      errors.add(:total_amount, "should be equal to product.price times quantity")
-    end
+  before_validation :compute_total_amount
+
+  private
+
+  def compute_total_amount
+    self.total_amount = product.price * quantity if product && quantity
   end
 end
