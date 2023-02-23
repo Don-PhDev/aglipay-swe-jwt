@@ -1,5 +1,10 @@
 class Api::V1::OrdersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: :create
+
+  def index
+    orders = Order.all
+    render json: orders
+  end
 
   def create
     product = Product.find(params[:product_id])
