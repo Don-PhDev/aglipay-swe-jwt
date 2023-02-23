@@ -10,4 +10,29 @@ ActiveAdmin.register Order do
       gon.products = Product.all.select(:id, :name, :price)
     end
   end
+
+  index do
+    selectable_column
+    id_column
+    column :user
+    column :product
+    column :quantity
+    column :total_amount
+    column :created_at
+    actions
+  end
+
+  filter :user
+  filter :product
+  filter :created_at
+
+  form do |f|
+    f.inputs do
+      f.input :user
+      f.input :product
+      f.input :quantity
+      f.input :total_amount
+    end
+    f.actions
+  end
 end
