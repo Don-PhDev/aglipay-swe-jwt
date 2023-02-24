@@ -153,5 +153,4 @@ To access the admin console, go to `/admin`.
 
 ## License
 
-This Ruby on Rails E-commerce application is available as open source under the terms of the [MIT](https://github.com/Don-PhDev/aglipay-swe-jwt/blob/main/LICENSE) License.
-
+This Ruby on Rails E-commerce application is available as open source under the terms of the [MIT](https://github.com/Don-PhDev/aglipay-swe-jwt/blob/master/LICENSE) License.
