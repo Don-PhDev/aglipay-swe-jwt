@@ -60,6 +60,10 @@ RSpec.describe Api::V1::OrdersController, type: :request do
 
       let(:order_params) { { quantity: 2, product_id: 0 } }
 
+      before { sign_in user }
+
+      let(:order_params) { { quantity: 2, product_id: 0 } }
+
       it "returns not found status" do
         post "/api/v1/orders", params: { order: order_params }
         expect(response).to have_http_status(:not_found)
