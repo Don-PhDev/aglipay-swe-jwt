@@ -1,13 +1,14 @@
 class Api::V1::ProductsController < ApiController
-  before_action :set_product, only: [:show, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
+  before_action :find_product, only: [:show, :update, :destroy]
 
   def index
-    products = Product.all
-    render json: products
+    render json: Product.all
   end
 
   def show
-    render json: @product
+    render json: @product, status: :ok
   end
 
   def create
@@ -22,7 +23,7 @@ class Api::V1::ProductsController < ApiController
 
   def update
     if @product.update(product_params)
-      render json: @product
+      render json: @product, status: :ok
     else
       render json: { errors: @product.errors.full_messages }, status: :unprocessable_entity
     end
@@ -35,11 +36,15 @@ class Api::V1::ProductsController < ApiController
 
   private
 
-  def set_product
-    @product = Product.find(params[:id])
+  def find_product
+    @product ||= Product.find(params[:id])
   end
 
   def product_params
     params.require(:product).permit(:name, :price, :category_id)
+  end
+
+  def record_not_found
+    render json: { error: "Record not found" }, status: :not_found
   end
 end
