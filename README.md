@@ -10,7 +10,7 @@ Create an E-Commerce application with the option to manage products, orders, use
 - Create API endpoints to perform CRUD operations on products
 - Create endpoints to purchase a product
 - Products need to be divided into categories
-- Setup an active admin console for performing CRUD operations on orders, products, categories and users
+- Setup an active admin console for performing CRUD operations on orders, products, categories, and users
 - Use RSpec for writing unit tests
 
 ## Installation
