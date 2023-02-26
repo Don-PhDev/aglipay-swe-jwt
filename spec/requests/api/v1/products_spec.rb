@@ -26,8 +26,8 @@ RSpec.describe Api::V1::ProductsController, type: :request do
     before { get '/api/v1/products' }
 
     it "returns products" do
-      expect(JSON.parse(response.body)).not_to be_empty
-      expect(JSON.parse(response.body).size).to eq(1)
+      expect(json).not_to be_empty
+      expect(json.size).to eq(1)
     end
 
     it "returns status code 200" do
@@ -40,8 +40,8 @@ RSpec.describe Api::V1::ProductsController, type: :request do
 
     context "when the record exists" do
       it "returns the product" do
-        expect(JSON.parse(response.body)).not_to be_empty
-        expect(JSON.parse(response.body)['id']).to eq(product.id)
+        expect(json).not_to be_empty
+        expect(json['id']).to eq(product.id)
       end
 
       it "returns status code 200" do
@@ -67,7 +67,7 @@ RSpec.describe Api::V1::ProductsController, type: :request do
       before { post '/api/v1/products', params: valid_attributes }
 
       it "creates a new product" do
-        expect(JSON.parse(response.body)['name']).to eq('New Product')
+        expect(json['name']).to eq('New Product')
       end
 
       it "returns status code 201" do
@@ -79,7 +79,7 @@ RSpec.describe Api::V1::ProductsController, type: :request do
       before { post '/api/v1/products', params: invalid_attributes }
 
       it "does not create a new product" do
-        expect(JSON.parse(response.body)['errors']).not_to be_empty
+        expect(json['errors']).not_to be_empty
       end
 
       it "returns status code 422" do
@@ -93,7 +93,7 @@ RSpec.describe Api::V1::ProductsController, type: :request do
       before { put "/api/v1/products/#{product.id}", params: { product: { name: "Updated Product" } } }
 
       it "updates the product" do
-        expect(JSON.parse(response.body)['name']).to eq('Updated Product')
+        expect(json['name']).to eq('Updated Product')
       end
 
       it "returns status code 200" do
@@ -105,7 +105,7 @@ RSpec.describe Api::V1::ProductsController, type: :request do
       before { put "/api/v1/products/#{product.id}", params: invalid_attributes }
 
       it "does not update the product" do
-        expect(JSON.parse(response.body)['errors']).not_to be_empty
+        expect(json['errors']).not_to be_empty
       end
 
       it "returns status code 422" do
