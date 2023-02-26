@@ -5,9 +5,9 @@ ActiveAdmin.register Product do
 
   form do |f|
     f.inputs "Product Details" do
+      f.input :category
       f.input :name
       f.input :price
-      f.input :category
     end
     f.actions
   end

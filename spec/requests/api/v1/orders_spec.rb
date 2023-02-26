@@ -1,24 +1,19 @@
-require 'rails_helper'
-
 RSpec.describe Api::V1::OrdersController, type: :request do
+  let(:user) { create(:user) }
+  let(:product) { create(:product) }
   let!(:order) { create(:order) }
 
   describe "GET /api/v1/orders" do
     before { get '/api/v1/orders' }
 
     it "returns orders" do
-      expect(json).not_to be_empty
-      expect(json.size).to eq(1)
-    end
-
-    it "returns status code 200" do
-      expect(response).to have_http_status(200)
+      expect(response).to be_successful
+      expect(response.body).not_to be_empty
+      expect(response.parsed_body.size).to eq(1)
     end
   end
 
   describe "POST /api/v1/orders" do
-    let(:user) { build(:user) }
-    let(:product) { create(:product) }
     let(:order_params) { { quantity: 2, product_id: product.id } }
 
     context "when authenticated with valid params" do
@@ -29,9 +24,10 @@ RSpec.describe Api::V1::OrdersController, type: :request do
           post "/api/v1/orders", params: { order: order_params }
         }.to change(Order, :count).by(1)
 
+        expect(response).to be_successful
         expect(response).to have_http_status(:created)
-        expect(json["quantity"]).to eq(2)
-        expect(json["total_amount"]).to eq(product.price * 2)
+        expect(response.parsed_body["quantity"]).to eq(2)
+        expect(BigDecimal(response.parsed_body["total_amount"])).to eq(product.price * 2)
       end
     end
 
@@ -43,10 +39,10 @@ RSpec.describe Api::V1::OrdersController, type: :request do
       it "does not create a new order" do
         expect {
           post "/api/v1/orders", params: { order: order_params }
-        }.to change(Order, :count).by(0)
+        }.not_to change(Order, :count)
 
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(json["errors"]).to include("Quantity must be greater than 0")
+        expect(response.parsed_body["errors"]).to include("Quantity must be greater than 0")
       end
     end
 
@@ -64,10 +60,14 @@ RSpec.describe Api::V1::OrdersController, type: :request do
 
       let(:order_params) { { quantity: 2, product_id: 0 } }
 
+      before { sign_in user }
+
+      let(:order_params) { { quantity: 2, product_id: 0 } }
+
       it "returns not found status" do
         post "/api/v1/orders", params: { order: order_params }
         expect(response).to have_http_status(:not_found)
-        expect(json["error"]).to eq("Product not found")
+        expect(response.parsed_body["error"]).to eq("Product not found")
       end
     end
   end
