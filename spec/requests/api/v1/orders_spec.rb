@@ -4,7 +4,7 @@ RSpec.describe Api::V1::OrdersController, type: :request do
   let!(:order) { create(:order) }
 
   describe "GET /api/v1/orders" do
-    before { get '/api/v1/orders' }
+    before { get "/api/v1/orders" }
 
     it "returns orders" do
       expect(response).to be_successful
